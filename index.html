@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard WebGIS</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Link ke file CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+         <!-- Navbar -->
+         <nav class="navbar">
+            <div class="logo">Dashboard Perolehan Suara Pemilu Presiden dan Wakil Presiden Provinsi Bangka Belitung 2024</div>
+            <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+            <ul class="menu">
+                <li><a href="https://wasfiq12.github.io/dashboard/">Home</a></li>
+                <li><a href="https://wasfiq12.github.io/pilpres/">See Fullscreen Map</a></li>
+                <li><a href="https://instagram.com/wasfiqordowi_">Contact</a></li>
+            </ul>
+            </nav>
+                <!-- Main Content -->
+            <div class="container mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Peta -->
+            <div class="bg-white p-4 shadow rounded">
+            <h2 class="text-lg font-semibold mb-4">Peta Interaktif</h2>
+            <iframe src="https://wasfiq12.github.io/pilpres/" class="w-full h-80 border rounded" allowfullscreen></iframe>
+            </div>
+            <!-- Diagram -->
+<div class="bg-white p-4 shadow rounded">
+    <h2 class="text-lg font-semibold mb-4">Diagram Suara Presiden per Kabupaten/Kota</h2>
+    <canvas id="stackedBarChart" width="800" height="400"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Data suara kandidat presiden dari CSV
+    const labels = ["Bangka", "Bangka Barat", "Bangka Selatan", "Bangka Tengah", "Belitung", "Belitung Timur", "Pangkalpinang"];
+    const kandidatData = {
+        "Anies Baswedan - Muhaimin Iskandar": [54479, 27592, 20644, 29006, 22132, 10783, 39712],
+        "Prabowo Subianto - Gibran Rakabuming Raka": [104488, 72502, 88719, 69013, 72181, 52452, 70528],
+        "Ganjar Pranowo - Mahfud MD": [33429, 22479, 17534, 20615, 20280, 16428, 20344]
+    };
+
+    // Warna khusus untuk setiap kandidat
+    const kandidatColors = {
+        "Anies Baswedan - Muhaimin Iskandar": "blue",
+        "Prabowo Subianto - Gibran Rakabuming Raka": "red",
+        "Ganjar Pranowo - Mahfud MD": "green"
+    };
+
+    // Menyiapkan dataset untuk Chart.js
+    const datasets = Object.keys(kandidatData).map(kandidat => ({
+        label: kandidat,
+        data: kandidatData[kandidat],
+        backgroundColor: kandidatColors[kandidat],
+        borderColor: kandidatColors[kandidat],
+        borderWidth: 1
+    }));
+
+    // Membuat grafik
+    const ctx = document.getElementById('stackedBarChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+            },
+            scales: {
+                x: {
+                    stacked: true // Mengaktifkan stack pada sumbu X
+                },
+                y: {
+                    stacked: true, // Mengaktifkan stack pada sumbu Y
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Tabel dari CSV</title>
+    <style>
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .table-auto {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        .table-auto th, .table-auto td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .table-auto th {
+            background-color: #f4f4f4;
+        }
+        .overflow-y-auto {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mx-auto mt-6 bg-white p-4 shadow rounded">
+    <h2 class="text-lg font-semibold mb-4">Data Tabel</h2>
+    <div class="overflow-y-auto h-80 border rounded"> <!-- Kontainer dengan scroll -->
+      <table class="table-auto border">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="px-4 py-2 border border-gray-300">Kab/Kot</th>
+            <th class="px-4 py-2 border border-gray-300">Anies Baswedan - Muhaimin Iskandar</th>
+            <th class="px-4 py-2 border border-gray-300">Prabowo Subianto - Gibran Rakabuming Raka</th>
+            <th class="px-4 py-2 border border-gray-300">Ganjar Pranowo - Mahfud MD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-4 py-2 border border-gray-300">Bangka</td>
+            <td class="px-4 py-2 border border-gray-300">54479</td>
+            <td class="px-4 py-2 border border-gray-300">104488</td>
+            <td class="px-4 py-2 border border-gray-300">33429</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border border-gray-300">Bangka Barat</td>
+            <td class="px-4 py-2 border border-gray-300">27592</td>
+            <td class="px-4 py-2 border border-gray-300">72502</td>
+            <td class="px-4 py-2 border border-gray-300">22479</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border border-gray-300">Bangka Selatan</td>
+            <td class="px-4 py-2 border border-gray-300">20644</td>
+            <td class="px-4 py-2 border border-gray-300">88719</td>
+            <td class="px-4 py-2 border border-gray-300">17534</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border border-gray-300">Bangka Tengah</td>
+            <td class="px-4 py-2 border border-gray-300">29006</td>
+            <td class="px-4 py-2 border border-gray-300">69013</td>
+            <td class="px-4 py-2 border border-gray-300">20615</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border border-gray-300">Belitung</td>
+            <td class="px-4 py-2 border border-gray-300">22132</td>
+            <td class="px-4 py-2 border border-gray-300">72181</td>
+            <td class="px-4 py-2 border border-gray-300">20280</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border border-gray-300">Belitung Timur</td>
+            <td class="px-4 py-2 border border-gray-300">10783</td>
+            <td class="px-4 py-2 border border-gray-300">52452</td>
+            <td class="px-4 py-2 border border-gray-300">16428</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border border-gray-300">Pangkalpinang</td>
+            <td class="px-4 py-2 border border-gray-300">39712</td>
+            <td class="px-4 py-2 border border-gray-300">70528</td>
+            <td class="px-4 py-2 border border-gray-300">20344</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
+        
+</body>
+</html>
