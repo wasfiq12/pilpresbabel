@@ -11,19 +11,22 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-100 font-sans">
-         <!-- Navbar -->
-             <nav class="navbar flex items-center justify-between bg-white p-4 shadow">
-            <div class="flex items-center space-x-4">
-            <img src="KPU_Logo.png" alt="Logo KPU" class="h-12 w-auto">
-            <div class="logo text-lg font-bold">
-            <div class="logo">Dashboard Perolehan Suara Pemilu Presiden dan Wakil Presiden Provinsi Bangka Belitung 2024</div>
-            <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-            <ul class="menu">
-                <li><a href="https://wasfiq12.github.io/pilpresbabel/">Home</a></li>
-                <li><a href="https://wasfiq12.github.io/pilpres/">See Fullscreen Map</a></li>
-                <li><a href="https://instagram.com/wasfiqordowi_">Contact</a></li>
-            </ul>
-            </nav>
+<nav class="navbar flex items-center justify-between bg-white p-4 shadow">
+    <!-- Logo KPU dan Judul -->
+    <div class="flex items-center space-x-4">
+        <img src="path/to/logo-kpu.png" alt="Logo KPU" class="h-12 w-auto">
+        <div class="logo text-lg font-bold">
+            Dashboard Perolehan Suara Pemilu Presiden dan Wakil Presiden Provinsi Bangka Belitung 2024
+        </div>
+    </div>
+    <!-- Menu Navigasi -->
+    <div class="menu-toggle md:hidden" onclick="toggleMenu()">&#9776;</div>
+    <ul class="menu hidden md:flex space-x-6">
+        <li><a href="https://wasfiq12.github.io/pilpresbabel/" class="hover:text-blue-500">Home</a></li>
+        <li><a href="https://wasfiq12.github.io/pilpres/" class="hover:text-blue-500">See Fullscreen Map</a></li>
+        <li><a href="https://instagram.com/wasfiqordowi_" class="hover:text-blue-500">Contact</a></li>
+    </ul>
+</nav>
                 <!-- Main Content -->
             <div class="container mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Peta -->
